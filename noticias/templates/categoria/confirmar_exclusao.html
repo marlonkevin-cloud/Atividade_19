@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir categoria - Portal Escolar{% endblock %}
+
+{% block content %}
+<section class="container py-4">
+    <h2>Confirmar exclusão de categoria</h2>
+    <p>Tem certeza de que deseja excluir a categoria <strong>{{ categoria.nome }}</strong>?</p>
+
+    <div class="alert alert-warning" role="alert">
+        Atenção: esta categoria poderá estar vinculada a notícias. Se houver notícias vinculadas, a exclusão será impedida.
+    </div>
+
+    <form method="post" action="{% url 'noticias:categoria_delete' categoria.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+        <a href="{% url 'noticias:categoria_detalhe' categoria.id %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</section>
+{% endblock %}
